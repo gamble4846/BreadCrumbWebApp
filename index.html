@@ -6,13 +6,333 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bread Crumb</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <link href="CustomCSS/Main.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/images/icon.png">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+</head>
+<body class="bg-secondary scroll scroll4">
+    <div ng-app="myApp" ng-controller="myCtrl"  data-ng-init="init()">
+        <div class="loader full_center" ng-show="loading"></div>
+
+        <div ng-show="website_all">
+            <!-- Navigation -->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-2 fixing_it">
+                <a class="navbar-brand" href="#">
+                    <img src="/images/icon.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                    Bread Crumb
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link pointer" ng-click="change_page(1)">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pointer" ng-click="change_page(2)">TvShows</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pointer" ng-click="change_page(3)">Movies</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pointer" ng-click="change_page(4)">Books</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pointer" ng-click="change_page(5)">Games</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pointer" ng-click="change_page(6)">Manga</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pointer" ng-click="change_page(7)">Comics</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pointer" ng-click="change_page(8)">Folders/Files</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pointer" ng-click="change_page(9)">Softwares</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pointer" ng-click="change_page(10)">Photos</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <!-- end of navigation -->
+
+            <br>
+            
+            <div class="mt-5">
+                <!-- Home -->
+                <section ng-show="home_page" class="container-fluid">
+                    Home
+                </section>
+                <!-- end of Home -->
+
+                <!-- TvShows -->
+                <section ng-show="tvshows_page" class="container-fluid center">
+                    <div ng-repeat="x in TvShow_DATA.Titles">
+                        <div class="row">
+                            <div ng-repeat="y in x.DATA | orderBy: 'Series_MainName'" class="col-sm">
+                                <div class="card mt-3 bg-dark text-white tooltip_cus pointer shadow-hover" style="width: 18rem;">
+                                    <img class="card-img-top" src="{{y.Series_Poster}}" alt="{{y.Series_MainName}}" loading="lazy">
+                                    <div class="card-body">
+                                        <h5 class="card-title control-overflow">{{y.Series_MainName}}</h5>
+                                    </div>
+                                    <span class="tooltip_custext">{{y.Series_MainName}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- end of TvShows -->
+
+                <!-- Movies -->
+                <section ng-show="movies_page" class="container-fluid">
+                    <div ng-repeat="x in Movies_DATA.Titles">
+                        <div class="row">
+                            <div ng-repeat="y in x.DATA | orderBy: 'Movies_MainName'" class="col-sm">
+                                <div class="card mt-3 bg-dark text-white tooltip_cus pointer shadow-hover" style="width: 18rem;">
+                                    <img class="card-img-top" src="{{y.Movies_Poster}}" alt="{{y.Movies_MainName}}" loading="lazy">
+                                    <div class="card-body">
+                                        <h5 class="card-title control-overflow">{{y.Movies_MainName}}</h5>
+                                    </div>
+                                    <span class="tooltip_custext">{{y.Movies_MainName}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- end of Movies -->
+
+                <!-- Books -->
+                <section ng-show="books_page" class="container-fluid">
+                    <div ng-repeat="x in Books_DATA.Titles">
+                        <div class="row">
+                            <div ng-repeat="y in x.DATA | orderBy: 'Book_Name'" class="col-sm">
+                                <div class="card mt-3 bg-dark text-white tooltip_cus pointer shadow-hover" style="width: 18rem;">
+                                    <img class="card-img-top" src="{{y.Cover_Image_Link}}" alt="{{y.Book_Name}}" loading="lazy">
+                                    <div class="card-body">
+                                        <h5 class="card-title control-overflow">{{y.Book_Name}}</h5>
+                                    </div>
+                                    <span class="tooltip_custext">{{y.Book_Name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- end of Books -->
+
+                <!-- Games -->
+                <section ng-show="games_page" class="container-fluid">
+                    <div ng-repeat="x in Games_DATA.Titles">
+                        <div class="row">
+                            <div ng-repeat="y in x.DATA | orderBy: 'Game_Name'" class="col-sm">
+                                <div class="card mt-3 bg-dark text-white tooltip_cus pointer shadow-hover" style="width: 18rem;">
+                                    <img class="card-img-top" src="{{y.Game_Poster}}" alt="{{y.Game_Name}}" loading="lazy">
+                                    <div class="card-body">
+                                        <h5 class="card-title control-overflow">{{y.Game_Name}}</h5>
+                                    </div>
+                                    <span class="tooltip_custext">{{y.Game_Name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- end of Games -->
+
+                <!-- Manga -->
+                <section ng-show="manga_page" class="container-fluid">
+                    <div ng-repeat="x in Manga_DATA.Titles">
+                        <div class="row">
+                            <div ng-repeat="y in x.DATA | orderBy: 'Manga_Name'" class="col-sm">
+                                <div class="card mt-3 bg-dark text-white tooltip_cus pointer shadow-hover" style="width: 18rem;">
+                                    <img class="card-img-top" src="{{y.Manga_CoverPage}}" alt="{{y.Book_Name}}" loading="lazy">
+                                    <div class="card-body">
+                                        <h5 class="card-title control-overflow">{{y.Manga_Name}}</h5>
+                                    </div>
+                                    <span class="tooltip_custext">{{y.Manga_Name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- end of Manga -->
+
+                <!-- Comics -->
+                <section ng-show="comics_page" class="container-fluid">
+                    Comics
+                </section>
+                <!-- end of Comics -->
+
+                <!-- Folders_Files -->
+                <section ng-show="folders_files_page" class="container-fluid">
+                    Folders_Files
+                </section>
+                <!-- end of Folders_Files -->
+
+                <!-- Softwares -->
+                <section ng-show="softwares_page" class="container-fluid">
+                    Softwares
+                </section>
+                <!-- end of Softwares -->
+
+                <!-- Photos -->
+                <section ng-show="photos_page" class="container-fluid">
+                    Photos
+                </section>
+                <!-- end of Photos -->
+            </div>
+            <!-- Footer -->
+            <footer class="bg-dark text-center text-white mt-5 footer_class">
+                <!-- Grid container -->
+                <div class="container p-4">
+                <!-- Section: Social media -->
+                    <section class="mb-4">
+                    <!-- Facebook -->
+                        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                        ><i class="fab fa-facebook-f"></i
+                        ></a>
+                        
+                        <!-- Twitter -->
+                        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                        ><i class="fab fa-twitter"></i
+                        ></a>
+                        
+                        <!-- Google -->
+                        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                        ><i class="fab fa-google"></i
+                        ></a>
+                        
+                        <!-- Instagram -->
+                        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                        ><i class="fab fa-instagram"></i
+                        ></a>
+                        
+                        <!-- Linkedin -->
+                        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                        ><i class="fab fa-linkedin-in"></i
+                        ></a>
+                        
+                        <!-- Github -->
+                        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                        ><i class="fab fa-github"></i
+                        ></a>
+                    </section>
+                    <!-- Section: Social media -->
+                    
+                    <!-- Section: Links -->
+                    <section class="">
+                        <!--Grid row-->
+                        <div class="row">
+                        <!--Grid column-->
+                        <div class="col-lg-3 col-md-6 mb-4 mb-md-0 footer_class_links">
+                        <h5 class="text-uppercase">Links</h5>
+                        
+                        <ul class="list-unstyled mb-0">
+                        <li>
+                        <a href="#!" class="text-white">Link 1</a>
+                        </li>
+                        <li>
+                        <a href="#!" class="text-white">Link 2</a>
+                        </li>
+                        <li>
+                        <a href="#!" class="text-white">Link 3</a>
+                        </li>
+                        <li>
+                        <a href="#!" class="text-white">Link 4</a>
+                        </li>
+                        </ul>
+                    </div>
+                    <!--Grid column-->
+                    
+                    <!--Grid column-->
+                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0 footer_class_links">
+                        <h5 class="text-uppercase">Links</h5>
+                        
+                        <ul class="list-unstyled mb-0">
+                        <li>
+                        <a href="#!" class="text-white">Link 1</a>
+                        </li>
+                        <li>
+                        <a href="#!" class="text-white">Link 2</a>
+                        </li>
+                        <li>
+                        <a href="#!" class="text-white">Link 3</a>
+                        </li>
+                        <li>
+                        <a href="#!" class="text-white">Link 4</a>
+                        </li>
+                        </ul>
+                    </div>
+                    <!--Grid column-->
+                    
+                    <!--Grid column-->
+                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0 footer_class_links">
+                        <h5 class="text-uppercase">Links</h5>
+                        
+                        <ul class="list-unstyled mb-0">
+                        <li>
+                        <a href="#!" class="text-white">Link 1</a>
+                        </li>
+                        <li>
+                        <a href="#!" class="text-white">Link 2</a>
+                        </li>
+                        <li>
+                        <a href="#!" class="text-white">Link 3</a>
+                        </li>
+                        <li>
+                        <a href="#!" class="text-white">Link 4</a>
+                        </li>
+                        </ul>
+                    </div>
+                    <!--Grid column-->
+                    
+                    <!--Grid column-->
+                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0 footer_class_links">
+                        <h5 class="text-uppercase">Links</h5>
+                        
+                        <ul class="list-unstyled mb-0">
+                        <li>
+                        <a href="#!" class="text-white">Link 1</a>
+                        </li>
+                        <li>
+                        <a href="#!" class="text-white">Link 2</a>
+                        </li>
+                        <li>
+                        <a href="#!" class="text-white">Link 3</a>
+                        </li>
+                        <li>
+                        <a href="#!" class="text-white">Link 4</a>
+                        </li>
+                        </ul>
+                        </div>
+                    <!--Grid column-->
+                    </div>
+                    <!--Grid row-->
+                    </section>
+                    <!-- Section: Links -->
+                </div>
+                <!-- Grid container -->
+                
+                <!-- Copyright -->
+                <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                    © 2020 Copyright: GAMBLE4846
+                </div>
+                <!-- Copyright -->
+            </footer>
+            <!-- Footer -->
+            
+        </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js" integrity="sha512-7oYXeK0OxTFxndh0erL8FsjGvrl2VMDor6fVqzlLGfwOQQqTbYsGPv4ZZ15QHfSk80doyaM0ZJdvkyDcVO7KFA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="AngularJS/Main.js"></script>
-</head>
-<body>
-    <div ng-app="myApp" ng-controller="myCtrl">
-        
-    </div>
 </body>
 </html>
