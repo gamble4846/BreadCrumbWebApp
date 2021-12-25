@@ -41,7 +41,6 @@ app.controller("myCtrl", function($scope, $http) {
     };
 
     $scope.hideall = function(value) {
-        $scope.website_all = false;
         $scope.home_page = false;
         $scope.tvshows_page = false;
         $scope.movies_page = false;
@@ -154,6 +153,7 @@ app.controller("myCtrl", function($scope, $http) {
     $scope.SaveSettings = function(){
         document.cookie = "Cookie_Script_Link="+$scope.Settings_Script_Link+"; expires=Thu, 18 Dec 2100 12:00:00 UTC; path=/";
         document.cookie = "Cookie_Google_APIKey="+$scope.Settings_Main_GoogleDriveAPIKEY+"; expires=Thu, 18 Dec 2100 12:00:00 UTC; path=/";
+        $scope.website_all = false;
         $scope.init();
     };
 });
