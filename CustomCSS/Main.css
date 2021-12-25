@@ -69,6 +69,10 @@
     .footer_class_links {
         display: none;
     }
+
+    .ver_image{
+        display: none;
+    }
 }
 
 .shadow-hover:hover {
@@ -102,4 +106,29 @@
     position: fixed;
     top: 0px;
     width: 100%;
+}
+
+.head_image{
+    height: 500px;
+    overflow: hidden;
+    vertical-align: middle;
+}
+
+.modal {
+    text-align: center;
+}
+
+@media screen and (min-width: 768px) { 
+    .modal:before {
+        display: inline-block;
+        vertical-align: middle;
+        content: " ";
+        height: 100%;
+    }
+}
+
+.modal-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
 }
