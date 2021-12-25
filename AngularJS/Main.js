@@ -59,7 +59,6 @@ app.controller("myCtrl", function($scope, $http) {
     };
 
     $scope.init = function () {
-        alert("Calling INIT");
         $scope.TvShow_DATA = null;
         $scope.Movies_DATA = null;
         $scope.Books_DATA = null;
@@ -89,13 +88,11 @@ app.controller("myCtrl", function($scope, $http) {
     };
 
     $scope.GETDATAFROMAPI = function(SCRIPT_LINK){
-        alert("Calling GETDATAFROMAPI");
         $http.get(SCRIPT_LINK).then(function(response){
             $scope.Server_Data = response;
             $scope.loading = false;
             $scope.change_page(1);
             $scope.bifurcateDATA();
-            alert("Finished GETDATAFROMAPI");
         });
     }
 
