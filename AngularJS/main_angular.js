@@ -145,19 +145,8 @@ app.controller("myCtrl", function($scope, $http) {
         navigator.clipboard.writeText(toCopy);
     }
 
-    $scope.CopyLink = function(link, inco){
-        $scope.copy_to_clip(link);
-        console.log("Copying Link: " + link +", Inco: " + inco);
-    };
-
-    $scope.OpenLink = function(link, inco){
+    $scope.open_link_newtab = function(link){
         window.open(link, '_blank');
-        console.log("Opening Link: " + link +", Inco: " + inco);
-    }
-
-    $scope.DirectLinkOpen = function(link, inco){
-        final_link = $scope.create_APILink(link);
-        $scope.OpenLink(final_link, inco);
     }
 
     $scope.create_APILink = function(link){
@@ -167,13 +156,25 @@ app.controller("myCtrl", function($scope, $http) {
         div_link = link.split("/");
         link_part_two = div_link[5];
         final_link = link_part_one + link_part_two + link_part_three + link_part_four;
-        console.log(final_link);
         return final_link;
     };
 
-    $scope.DirectLinkCopy = function(link, inco){
-        final_link = $scope.create_APILink(link);
-        $scope.CopyLink(final_link, inco);
+    $scope.TvShowLink_Mal = function(link, copy_open, direct_nornmal, inco, rev_seasonid, rev_episodeid){
+        final_link = link;
+        if(direct_nornmal == "direct"){
+            final_link = $scope.create_APILink(link);
+        }
+
+        if(copy_open == "copy"){
+            $scope.copy_to_clip(final_link);
+        }
+        else{
+            $scope.open_link_newtab(final_link);
+        }
+
+        if(inco){
+            $scope.CreateHistory_TvShow(rev_seasonid,rev_episodeid);
+        }
     };
 
     $scope.init_OpenedTvShow = function(){
@@ -269,10 +270,12 @@ app.controller("myCtrl", function($scope, $http) {
         final_count = 0;
         for(let i=0; i<$scope.History_DATA.TvShows.length; i++){
             for(let j=0; j<$scope.History_DATA.TvShows[i].DATA.length; j++){
-                if($scope.History_DATA.TvShows[i].DATA[j].Series_Id_His == $scope.local_Opened_Series_ID){
-                    if($scope.History_DATA.TvShows[i].DATA[j].Series_SeasonId_His == Season_Id){
-                        if($scope.History_DATA.TvShows[i].DATA[j].Series_EpisodeID_His == Episode_Id){
-                            final_count++;
+                if($scope.History_DATA.TvShows[i].DATA[j].Server_ID_His == $scope.local_Opened_Series_Server){
+                    if($scope.History_DATA.TvShows[i].DATA[j].Series_Id_His == $scope.local_Opened_Series_ID){
+                        if($scope.History_DATA.TvShows[i].DATA[j].Series_SeasonId_His == Season_Id){
+                            if($scope.History_DATA.TvShows[i].DATA[j].Series_EpisodeID_His == Episode_Id){
+                                final_count++;
+                            }
                         }
                     }
                 }
@@ -280,4 +283,30 @@ app.controller("myCtrl", function($scope, $http) {
         }
         return final_count;
     };
+
+    $scope.CreateHistory_TvShow = function(Season_Id, Episode_Id){
+        console.log($scope.local_Opened_Series_Serve);
+        console.log($scope.local_Opened_Series_ID);
+        Para1 = "?main=CreateHistory_TvShow&Series_SeasonId_His="+Season_Id+"&Series_EpisodeID_His="+Episode_Id;
+        Para2 = "&Server_ID_His="+$scope.local_Opened_Series_Server;
+        Para3 = "&Series_Id_His="+$scope.local_Opened_Series_ID;
+        Para4 = "&Date_Time_His="+$scope.getCurrentTime();
+
+        final_Para = Para1 + Para2 + Para3 + Para4;
+
+        $http.post(localStorage['local_Script_Link']+final_Para).then(function(response){
+            console.log(response.data);
+        });
+    }
+
+    $scope.getCurrentTime = function () { 
+        var currentdate = new Date(); 
+        var datetime = currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + " "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+        return datetime;
+    }
 });
