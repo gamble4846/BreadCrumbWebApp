@@ -1,0 +1,15 @@
+a{
+    text-decoration: none !important
+}
+
+.margin_top_gamble{
+    margin-top: 100px;
+}
+
+.gamble_pointer {
+    cursor: pointer;
+}
+
+.border_gamble{
+    border-style: solid;
+}

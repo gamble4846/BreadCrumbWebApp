@@ -53,6 +53,7 @@ app.controller("myCtrl", function($scope, $http) {
         $scope.photos_page = false;
         $scope.loading = false;
         $scope.opened_movie = false;
+        $scope.opened_tvshow = false;
         $scope.settings_page = false;
         $(window).scrollTop(0);
     };
@@ -123,10 +124,19 @@ app.controller("myCtrl", function($scope, $http) {
 
         $scope.OpenedMovieTitle = movie;
         $scope.OpenedMovieLinks = currentMovieLinks;
+        $scope.OpenedMovieLinks = currentMovieLinks;
+
+        console.log($scope.OpenedMovieLinks);
     };
 
     $scope.mySplit = function(string) {
-        var array = string.split(',');
+        var array = null;
+        try {
+            array = string.split(',');
+        }
+        catch(err) {
+            console.log("mySplit Exception");
+        }
         return array;
     };
 
@@ -156,4 +166,24 @@ app.controller("myCtrl", function($scope, $http) {
         $scope.website_all = false;
         $scope.init();
     };
+
+    $scope.OpenTvShow = function(tvshow, Server_ID_lis){
+        $scope.hideall();
+        $scope.opened_tvshow = true;
+
+        tvshow_seasons = $scope.TvShow_DATA.Seasons;
+        current_tvshow_seasons = [];
+        for(let i = 0; i < tvshow_seasons.length; i++){
+            if(tvshow_seasons[i].Server_ID == Server_ID_lis){
+                for(let j = 0; j< (tvshow_seasons[i].DATA).length; j++){
+                    if((tvshow_seasons[i].DATA[j]).Series_Id == tvshow.Series_Id){
+                        current_tvshow_seasons.push(tvshow_seasons[i].DATA[j])
+                    }
+                }
+            }
+        }
+
+        $scope.OpenedTvShowTitle = tvshow;
+        $scope.OpenedSeasons = current_tvshow_seasons;
+    }
 });

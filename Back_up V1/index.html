@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bread Crumb</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="CustomCSS/Main.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="https://lh3.googleusercontent.com/pw/AM-JKLXJ5J-R7iAxjfYaDsXSi_CrTgTWaZvChbQ_yq4uC9Wxf_8TNJHNGNbJg8s6WvL3GEXHB_n9jwlPf6f3F3RSsPnIdp7jPOVnFDQlr7ZczCTxd_d8RL6_drxofd4z59vQe_s5rFdzhEWHJEFIOtrLaX0=w860-h814-no?authuser=0">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <script src="https://kit.fontawesome.com/e056c78508.js" crossorigin="anonymous"></script>
+</head>
+<body class="bg-secondary scroll scroll4">
+    <div ng-app="myApp" ng-controller="myCtrl"  data-ng-init="init()">
+        <div class="loader full_center" ng-show="loading"></div>
+
+        <div ng-show="website_all">
+            <!-- Navigation -->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-2 fixing_it">
+                <a class="navbar-brand" href="#">
+                    <img src="https://lh3.googleusercontent.com/pw/AM-JKLXJ5J-R7iAxjfYaDsXSi_CrTgTWaZvChbQ_yq4uC9Wxf_8TNJHNGNbJg8s6WvL3GEXHB_n9jwlPf6f3F3RSsPnIdp7jPOVnFDQlr7ZczCTxd_d8RL6_drxofd4z59vQe_s5rFdzhEWHJEFIOtrLaX0=w860-h814-no?authuser=0" width="30" height="30" class="d-inline-block align-top" alt="">
+                    Bread Crumb
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link pointer" ng-click="change_page(1)">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pointer" ng-click="change_page(2)">TvShows</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pointer" ng-click="change_page(3)">Movies</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pointer" ng-click="change_page(4)">Books</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pointer" ng-click="change_page(5)">Games</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pointer" ng-click="change_page(6)">Manga</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pointer" ng-click="change_page(7)">Comics</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pointer" ng-click="change_page(8)">Folders/Files</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pointer" ng-click="change_page(9)">Softwares</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pointer" ng-click="change_page(10)">Photos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pointer" ng-click="change_page(11)">Settings</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <!-- end of navigation -->
+
+            <br>
+            
+            <div class="mt-5">
+                <!-- Settings -->
+                <section ng-show="settings_page" class="container-fluid">
+                    <hr class="text-white">
+                    <span class="text-center text-white h4">Settings</span>
+                    <hr class="text-white">
+                    <form>
+                        <div class="form-group">
+                            <label for="Settings_Script_Link">Script Link</label>
+                            <input type="text" class="form-control mt-2" id="Settings_Script_Link" placeholder="Enter Script Link" ng-model="Settings_Script_Link">
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="Settings_Main_GoogleDriveAPIKEY">Google Drive API KEY</label>
+                            <input type="text" class="form-control mt-2" id="Settings_Main_GoogleDriveAPIKEY" placeholder="Enter Google Drive API KEY" ng-model="Settings_Main_GoogleDriveAPIKEY">
+                        </div>
+                    </form>
+                    <hr class="text-white">
+                    <button type="button" class="btn btn-danger col-12" ng-click="SaveSettings()">Save</button>
+                    <hr class="text-white">
+                </section>
+                <!-- end of Settings -->
+                
+                <!-- Home -->
+                <section ng-show="home_page" class="container-fluid">
+                    Home
+                </section>
+                <!-- end of Home -->
+
+                <!-- TvShows -->
+                <section ng-show="tvshows_page" class="container-fluid center">
+                    <div ng-repeat="x in TvShow_DATA.Titles">
+                        <div class="row">
+                            <div ng-repeat="y in x.DATA | orderBy: 'Series_MainName'" class="col-sm">
+                                <div class="card mt-3 bg-dark text-white tooltip_cus pointer shadow-hover" style="width: 18rem;" ng-click="OpenTvShow(y,x.Server_ID)">
+                                    <img class="card-img-top img-fluid" src="{{y.Series_Poster}}" alt="{{y.Series_MainName}}" loading="lazy">
+                                    <div class="card-body">
+                                        <h5 class="card-title control-overflow">{{y.Series_MainName}}</h5>
+                                    </div>
+                                    <span class="tooltip_custext">{{y.Series_MainName}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- end of TvShows -->
+
+                <!-- Movies -->
+                <section ng-show="movies_page" class="container-fluid">
+                    <div ng-repeat="x in Movies_DATA.Titles">
+                        <div class="row">
+                            <div ng-repeat="y in x.DATA | orderBy: 'Movies_MainName'" class="col-sm">
+                                <div class="card mt-3 bg-dark text-white tooltip_cus pointer shadow-hover" style="width: 18rem;" ng-click="OpenMovie(y,x.Server_ID)">
+                                    <img class="card-img-top img-fluid" src="{{y.Movies_Poster}}" alt="{{y.Movies_MainName}}" loading="lazy">
+                                    <div class="card-body">
+                                        <h5 class="card-title control-overflow">{{y.Movies_MainName}}</h5>
+                                        <p>{{y.Movies_ReleaseYear}}</p>
+                                    </div>
+                                    <span class="tooltip_custext">{{y.Movies_MainName}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- end of Movies -->
+
+                <!-- Books -->
+                <section ng-show="books_page" class="container-fluid">
+                    <div ng-repeat="x in Books_DATA.Titles">
+                        <div class="row">
+                            <div ng-repeat="y in x.DATA | orderBy: 'Book_Name'" class="col-sm">
+                                <div class="card mt-3 bg-dark text-white tooltip_cus pointer shadow-hover" style="width: 18rem;">
+                                    <img class="card-img-top img-fluid" src="{{y.Cover_Image_Link}}" alt="{{y.Book_Name}}" loading="lazy">
+                                    <div class="card-body">
+                                        <h5 class="card-title control-overflow">{{y.Book_Name}}</h5>
+                                    </div>
+                                    <span class="tooltip_custext">{{y.Book_Name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- end of Books -->
+
+                <!-- Games -->
+                <section ng-show="games_page" class="container-fluid">
+                    <div ng-repeat="x in Games_DATA.Titles">
+                        <div class="row">
+                            <div ng-repeat="y in x.DATA | orderBy: 'Game_Name'" class="col-sm">
+                                <div class="card mt-3 bg-dark text-white tooltip_cus pointer shadow-hover" style="width: 18rem;">
+                                    <img class="card-img-top img-fluid" src="{{y.Game_Poster}}" alt="{{y.Game_Name}}" loading="lazy">
+                                    <div class="card-body">
+                                        <h5 class="card-title control-overflow">{{y.Game_Name}}</h5>
+                                    </div>
+                                    <span class="tooltip_custext">{{y.Game_Name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- end of Games -->
+
+                <!-- Manga -->
+                <section ng-show="manga_page" class="container-fluid">
+                    <div ng-repeat="x in Manga_DATA.Titles">
+                        <div class="row">
+                            <div ng-repeat="y in x.DATA | orderBy: 'Manga_Name'" class="col-sm">
+                                <div class="card mt-3 bg-dark text-white tooltip_cus pointer shadow-hover" style="width: 18rem;">
+                                    <img class="card-img-top img-fluid" src="{{y.Manga_CoverPage}}" alt="{{y.Book_Name}}" loading="lazy">
+                                    <div class="card-body">
+                                        <h5 class="card-title control-overflow">{{y.Manga_Name}}</h5>
+                                    </div>
+                                    <span class="tooltip_custext">{{y.Manga_Name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- end of Manga -->
+
+                <!-- Comics -->
+                <section ng-show="comics_page" class="container-fluid">
+                    Comics
+                </section>
+                <!-- end of Comics -->
+
+                <!-- Folders_Files -->
+                <section ng-show="folders_files_page" class="container-fluid">
+                    Folders_Files
+                </section>
+                <!-- end of Folders_Files -->
+
+                <!-- Softwares -->
+                <section ng-show="softwares_page" class="container-fluid">
+                    Softwares
+                </section>
+                <!-- end of Softwares -->
+
+                <!-- Photos -->
+                <section ng-show="photos_page" class="container-fluid">
+                    Photos
+                </section>
+                <!-- end of Photos -->
+
+                <!-- Opened Movie -->
+                <section ng-show="opened_movie" class="container-fluid">
+                    <div class="row">
+                        <div class="col-12 control-overflow">
+                            <div class="head_image img-fluid">
+                                <img src={{OpenedMovieTitle.Movies_Poster}} alt={{OpenedMovieTitle.Movies_MainName}} width="100%">
+                            </div>
+
+                            <div class="head_image2 img-fluid">
+                                <img src={{OpenedMovieTitle.Movies_Poster}} alt={{OpenedMovieTitle.Movies_MainName}} width="100%">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-3 ver_image">
+                            <div class="movie_details mt-3">
+                                <img class="ver_image img-fluid" src={{OpenedMovieTitle.Movies_Ver_Poster}} alt={{OpenedMovieTitle.Movies_MainName}}>
+                            </div>
+                        </div>
+                        <div class="col-9 mt-3">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="h1 text-white">{{OpenedMovieTitle.Movies_MainName}}</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div ng-if="OpenedMovieTitle.Movies_AltNames != '-'">
+                                        <div class="h4">{{OpenedMovieTitle.Movies_AltNames}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="h5">Release Year: {{OpenedMovieTitle.Movies_ReleaseYear}}</div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="h5"><i class="fab fa-imdb"></i>: {{OpenedMovieTitle.Movie_IMDB_ID}}</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="h5">Director(s): {{OpenedMovieTitle.Movies_Directors}}</div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="h5">Writer(s): {{OpenedMovieTitle.Movies_Writers}}</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="h5">Star(s): {{OpenedMovieTitle.Movies_Stars}}</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="h5">Genre: 
+                                        <span ng-repeat="x in mySplit(OpenedMovieTitle.Movies_Genre)">
+                                            <button type="button" class="btn btn-dark" ng-click="Genre_FUN(x,'Movies')">
+                                                {{x}}
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="h6">
+                                        <div ng-if="OpenedMovieTitle.Movies_ExtraInformation != '-'">
+                                            <div class="h5">{{OpenedMovieTitle.Movies_ExtraInformation}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-3">
+                        <div class="col-12">
+                            <hr class="text-white">
+                            <span class="text-center text-white h4">Links</span>
+                            <hr class="text-white">
+                            <div class="row" ng-repeat="x in OpenedMovieLinks">
+                                <button type="button" class="btn btn-dark btn-lg btn-block mt-2" data-toggle="collapse" data-target="#Collapse_MovieLinks_{{x.Link_Id}}">
+                                    <span>{{x.Link_Quality}}</span>
+                                    <span> || Audio: {{x.Link_Language}}</span>
+                                    <span class="ver_image"> || Subtitles: {{x.Link_Subtitles}}</span>
+                                    <span> || Size: {{x.Link_Size}}</span>
+                                </button>
+                                <div class="collapse" id="Collapse_MovieLinks_{{x.Link_Id}}">
+                                    <table class="table table-dark mt-1">
+                                        <tr>
+                                            <td>Link Id</td>
+                                            <td>{{x.Link_Id}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Movies Id</td>
+                                            <td>{{x.Movies_Id}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Link Quality</td>
+                                            <td>{{x.Link_Quality}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Link Language</td>
+                                            <td>{{x.Link_Language}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Link Subtitles</td>
+                                            <td>{{x.Link_Subtitles}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Link Email</td>
+                                            <td>{{x.Link_Email}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Link Size</td>
+                                            <td>{{x.Link_Size}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Link Password</td>
+                                            <td>{{x.Link_Password}} <i class="fas fa-copy pointer" ng-click="CopyString(x.Link_Password)"></i></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Link Describtion</td>
+                                            <td>{{x.Link_Desc}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Streamable</td>
+                                            <td>{{x.Streamable}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <button type="button" class="btn btn-success" ng-click="OpenLink(x.Link_link, False)">Open Link</button>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger" ng-click="OpenLink(x.Link_link, True)">Open Link <i class="fas fa-user-secret"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <button type="button" class="btn btn-success" ng-click="CopyLink(x.Link_link, False)">Copy Link</button>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger" ng-click="CopyLink(x.Link_link, True)">Copy Link <i class="fas fa-user-secret"></i></button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <hr class="text-white">
+                        </div>
+                    </div>
+                </section>
+                <!-- end of Opened Movie -->
+
+                <!-- Opened TvShow -->
+                <section ng-show="opened_tvshow" class="container-fluid">
+                    <div class="row">
+                        <div class="col-12 control-overflow">
+                            <div class="head_image img-fluid">
+                                <img src={{OpenedTvShowTitle.Series_Poster}} alt={{OpenedTvShowTitle.Series_MainName}} width="100%">
+                            </div>
+
+                            <div class="head_image2 img-fluid">
+                                <img src={{OpenedTvShowTitle.Series_Poster}} alt={{OpenedTvShowTitle.Series_MainName}} width="100%">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-3 ver_image">
+                            <div class="movie_details mt-3">
+                                <img class="ver_image img-fluid" src={{OpenedTvShowTitle.Series_Ver_Poster}} alt={{OpenedTvShowTitle.Series_MainName}}>
+                            </div>
+                        </div>
+                        <div class="col-9 mt-3">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="h1 text-white">{{OpenedTvShowTitle.Series_MainName}}</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div ng-if="OpenedTvShowTitle.Series_AltNames != '-'">
+                                        <div class="h4">{{OpenedTvShowTitle.Series_AltNames}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="h5">Release Year: {{OpenedTvShowTitle.Series_ReleaseYear}}</div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="h5"><i class="fab fa-imdb"></i>: {{OpenedTvShowTitle.Series_IMDB_ID_TAG_ID}}</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="h5">Genre: 
+                                        <span ng-repeat="x in mySplit(OpenedTvShowTitle.Series_Genre)">
+                                            <button type="button" class="btn btn-dark" ng-click="Genre_FUN(x,'TvShows')">
+                                                {{x}}
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="h6">
+                                        <div ng-if="OpenedTvShowTitle.Series_ExtraInformation != '-'">
+                                            <div class="h5">{{OpenedTvShowTitle.Series_ExtraInformation}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-3">
+                        <div class="col-12">
+                            <hr class="text-white">
+                            <div class="col-4">
+                                <select class="form-select" aria-label="Default select example">
+                                    <option ng-repeat="x in OpenedSeasons" value="x.Season_Id">{{x.Season_Number}}: {{x.Season_Name}}</option>
+                                </select>
+                            </div>
+                            <hr class="text-white">
+                            <span class="text-center text-white h4">Episodes</span>
+                            <hr class="text-white">
+                            <hr class="text-white">
+                        </div>
+                    </div>
+                </section>
+                <!-- end of Opened TvShow -->
+            </div>
+            <!-- Footer -->
+            <footer class="bg-dark text-center text-white mt-5 footer_class">
+                <!-- Grid container -->
+                <div class="container p-4">
+                <!-- Section: Social media -->
+                    <section class="mb-4">
+                    <!-- Facebook -->
+                        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                        ><i class="fab fa-facebook-f"></i
+                        ></a>
+                        
+                        <!-- Twitter -->
+                        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                        ><i class="fab fa-twitter"></i
+                        ></a>
+                        
+                        <!-- Google -->
+                        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                        ><i class="fab fa-google"></i
+                        ></a>
+                        
+                        <!-- Instagram -->
+                        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                        ><i class="fab fa-instagram"></i
+                        ></a>
+                        
+                        <!-- Linkedin -->
+                        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                        ><i class="fab fa-linkedin-in"></i
+                        ></a>
+                        
+                        <!-- Github -->
+                        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+                        ><i class="fab fa-github"></i
+                        ></a>
+                    </section>
+                    <!-- Section: Social media -->
+                    
+                    <!-- Section: Links -->
+                    <section class="">
+                        <!--Grid row-->
+                        <div class="row">
+                        <!--Grid column-->
+                        <div class="col-lg-3 col-md-6 mb-4 mb-md-0 footer_class_links">
+                        <h5 class="text-uppercase">Links</h5>
+                        
+                        <ul class="list-unstyled mb-0">
+                        <li>
+                        <a href="#!" class="text-white">Link 1</a>
+                        </li>
+                        <li>
+                        <a href="#!" class="text-white">Link 2</a>
+                        </li>
+                        <li>
+                        <a href="#!" class="text-white">Link 3</a>
+                        </li>
+                        <li>
+                        <a href="#!" class="text-white">Link 4</a>
+                        </li>
+                        </ul>
+                    </div>
+                    <!--Grid column-->
+                    
+                    <!--Grid column-->
+                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0 footer_class_links">
+                        <h5 class="text-uppercase">Links</h5>
+                        
+                        <ul class="list-unstyled mb-0">
+                        <li>
+                        <a href="#!" class="text-white">Link 1</a>
+                        </li>
+                        <li>
+                        <a href="#!" class="text-white">Link 2</a>
+                        </li>
+                        <li>
+                        <a href="#!" class="text-white">Link 3</a>
+                        </li>
+                        <li>
+                        <a href="#!" class="text-white">Link 4</a>
+                        </li>
+                        </ul>
+                    </div>
+                    <!--Grid column-->
+                    
+                    <!--Grid column-->
+                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0 footer_class_links">
+                        <h5 class="text-uppercase">Links</h5>
+                        
+                        <ul class="list-unstyled mb-0">
+                        <li>
+                        <a href="#!" class="text-white">Link 1</a>
+                        </li>
+                        <li>
+                        <a href="#!" class="text-white">Link 2</a>
+                        </li>
+                        <li>
+                        <a href="#!" class="text-white">Link 3</a>
+                        </li>
+                        <li>
+                        <a href="#!" class="text-white">Link 4</a>
+                        </li>
+                        </ul>
+                    </div>
+                    <!--Grid column-->
+                    
+                    <!--Grid column-->
+                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0 footer_class_links">
+                        <h5 class="text-uppercase">Links</h5>
+                        
+                        <ul class="list-unstyled mb-0">
+                        <li>
+                        <a href="#!" class="text-white">Link 1</a>
+                        </li>
+                        <li>
+                        <a href="#!" class="text-white">Link 2</a>
+                        </li>
+                        <li>
+                        <a href="#!" class="text-white">Link 3</a>
+                        </li>
+                        <li>
+                        <a href="#!" class="text-white">Link 4</a>
+                        </li>
+                        </ul>
+                        </div>
+                    <!--Grid column-->
+                    </div>
+                    <!--Grid row-->
+                    </section>
+                    <!-- Section: Links -->
+                </div>
+                <!-- Grid container -->
+                
+                <!-- Copyright -->
+                <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                    © 2020 Copyright: GAMBLE4846
+                </div>
+                <!-- Copyright -->
+            </footer>
+            <!-- Footer -->
+            
+        </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js" integrity="sha512-7oYXeK0OxTFxndh0erL8FsjGvrl2VMDor6fVqzlLGfwOQQqTbYsGPv4ZZ15QHfSk80doyaM0ZJdvkyDcVO7KFA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="AngularJS/Main.js"></script>
+</body>
+</html>

@@ -85,11 +85,26 @@
 	</header>
 	<!-- end header -->
 
-	<!-- catalog -->
-	<div class="catalog">
-		HOME
-	</div>
-	<!-- end catalog -->
+	<!-- Settings -->
+	<div class="container text-white margin_top_gamble">
+        <hr class="text-white mt-5">
+        <span class="text-center text-white h4">Settings</span>
+        <hr class="text-white">
+        <form>
+            <div class="form-group">
+                <label for="Settings_Script_Link">Script Link</label>
+                <input type="text" class="form-control mt-2" id="Settings_Script_Link" placeholder="Enter Script Link" ng-model="Settings_Script_Link">
+            </div>
+            <div class="form-group mt-3">
+                <label for="Settings_Main_GoogleDriveAPIKEY">Google Drive API KEY</label>
+                <input type="text" class="form-control mt-2" id="Settings_Main_GoogleDriveAPIKEY" placeholder="Enter Google Drive API KEY" ng-model="Settings_Main_GoogleDriveAPIKEY">
+            </div>
+        </form>
+        <hr class="text-white">
+        <button type="button" class="btn btn-danger col-12" ng-click="SaveSettings()">Save</button>
+        <hr class="text-white">
+    </div>
+	<!-- end Settings -->
 
 
 	<!-- footer -->
@@ -183,8 +198,8 @@
 	<script src="JS/main.js"></script>
 	<script src="JS/main_page.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.js" integrity="sha512-rCVQBDU9Ny0aKLo1/B1MqgRjWEMlCL3WJ0DD6mJeK6qMZqpN9JCRxPtMQWWR9XWCMFIqlSgT4uOdwpvxWTSejw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script src="AngularJS/main_angular.js"></script>
-	<!-- end JS -->
+	<script src="AngularJS/settings_angular.js"></script>
+    <!-- end JS -->
 
 </body>
 
