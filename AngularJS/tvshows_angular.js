@@ -5,6 +5,7 @@ app.controller("myCtrl", function($scope, $http) {
         $scope.Server_Data = JSON.parse(localStorage['Server_Data']);
         console.log($scope.Server_Data);
         $scope.bifurcateDATA();
+        console.log($scope.History_DATA);
     }
 
     $scope.bifurcateDATA = function(){
@@ -15,6 +16,7 @@ app.controller("myCtrl", function($scope, $http) {
         $scope.Manga_DATA = $scope.Server_Data.data.Manga;
         $scope.Comics_DATA = $scope.Server_Data.data.Comics;
         $scope.Folders_Files_DATA = $scope.Server_Data.data.Folders_Files;
+        $scope.History_DATA = $scope.Server_Data.data.History;
     };
     
     $scope.copy_to_clip = function(toCopy){

@@ -19,6 +19,7 @@ app.controller("myCtrl", function($scope, $http) {
         $scope.Manga_DATA = $scope.Server_Data.data.Manga;
         $scope.Comics_DATA = $scope.Server_Data.data.Comics;
         $scope.Folders_Files_DATA = $scope.Server_Data.data.Folders_Files;
+        $scope.History_DATA = $scope.Server_Data.data.History;
     };
 
     $scope.GetCurrentTvShow = function(){

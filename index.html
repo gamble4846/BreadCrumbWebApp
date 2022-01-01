@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="CSS/magnific-popup.css">
 	<link rel="stylesheet" href="CSS/main.css">
 	<link rel="stylesheet" href="CSS/gamble_CSS.css">
+	<link rel="stylesheet" href="CSS/Dual_Ring.css">
 	<!-- end CSS -->
 
 	<!-- Favicons -->
@@ -24,7 +25,7 @@
 
 <body data-select2-id="select2-data-8-47n9" class="nounderline" ng-app="myApp" ng-controller="myCtrl"  data-ng-init="init()">
 	<!-- header (relative style) -->
-	<header class="header header--static">
+	<header class="header header--static" ng-show="header_show">
 		<div class="container">
 			<div class="row">
 				<div class="col-12">
@@ -86,14 +87,14 @@
 	<!-- end header -->
 
 	<!-- catalog -->
-	<div class="catalog">
+	<div class="catalog" ng-show="catalog_show">
 		HOME
 	</div>
 	<!-- end catalog -->
 
 
 	<!-- footer -->
-	<footer class="footer">
+	<footer class="footer" ng-show="footer_show">
 		<div class="container">
 			<div class="row">
 				<div class="col-12 col-sm-8 col-md-6 col-lg-4 col-xl-3 order-4 order-md-1 order-lg-4 order-xl-1">
@@ -171,6 +172,10 @@
 		</div>
 	</footer>
 	<!-- end footer -->
+
+	<!-- Loading -->
+	<div class="lds-dual-ring div_full_gamble_center" ng-show="loader_show"></div>
+	<!-- end Loading -->
 
 	<!-- JS -->
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
