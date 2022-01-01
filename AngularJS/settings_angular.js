@@ -14,6 +14,7 @@ app.controller("myCtrl", function($scope, $http) {
         local_Google_APIKey = localStorage['local_Google_APIKey'];
 
         $scope.Settings_Script_Link = local_Script_Link;
+        $scope.Settings_Main_GoogleDriveAPIKEY = local_Google_APIKey;
     };
 
     $scope.copy_to_clip = function(toCopy){

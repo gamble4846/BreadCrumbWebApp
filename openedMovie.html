@@ -44,7 +44,7 @@
 								<a class="header__nav-link" href="index.html" role="button" id="Nav_Home" aria-haspopup="true" aria-expanded="false">Home</a>
 							</li>
 							<li class="header__nav-item">
-								<a class="header__nav-link" href="#" role="button" id="Nav_TvShows" aria-haspopup="true" aria-expanded="false">Tv Shows</a>
+								<a class="header__nav-link" href="tvshows.html" role="button" id="Nav_TvShows" aria-haspopup="true" aria-expanded="false">Tv Shows</a>
 							</li>
 							<li class="header__nav-item">
 								<a class="header__nav-link" href="movies.html" role="button" id="Nav_Movies" aria-haspopup="true" aria-expanded="false">Movies</a>
@@ -167,8 +167,14 @@
                                         <span>Streamable: {{x.Streamable}}<br></span>
                                         <span class="border_gamble gamble_pointer py-1" ng-click="OpenLink(x.Link_link, true)"><i class="fas fa-link p-3"></i><i class="fa fa-external-link p-3" aria-hidden="true"></i></span>
                                         <span class="border_gamble gamble_pointer py-1" ng-click="OpenLink(x.Link_link, false)"><i class="fas fa-link p-3"></i><i class="fa fa-external-link p-3" aria-hidden="true"></i><i class="fas fa-user-secret p-3"></i></span><br>
-                                        <span class="border_gamble gamble_pointer py-1" ng-click="copy_to_clip(x.Link_link, true)"><i class="fas fa-link p-3"></i><i class="fas fa-copy p-3"></i></span>
-                                        <span class="border_gamble gamble_pointer py-1" ng-click="copy_to_clip(x.Link_link, false)"><i class="fas fa-link p-3"></i><i class="fas fa-copy p-3"></i><i class="fas fa-user-secret p-3"></i></span>
+                                        <span class="border_gamble gamble_pointer py-1" ng-click="CopyLink(x.Link_link, true)"><i class="fas fa-link p-3"></i><i class="fas fa-copy p-3"></i></span>
+                                        <span class="border_gamble gamble_pointer py-1" ng-click="CopyLink(x.Link_link, false)"><i class="fas fa-link p-3"></i><i class="fas fa-copy p-3"></i><i class="fas fa-user-secret p-3"></i></span><br>
+										<span ng-if="x.Streamable == 'Yes'">
+											<span class="border_gamble gamble_pointer py-1" ng-click="DirectLinkOpen(x.Link_link, true)"><i class="fas fa-play p-3"></i><i class="fa fa-download p-3" aria-hidden="true"></i></span>
+											<span class="border_gamble gamble_pointer py-1" ng-click="DirectLinkOpen(x.Link_link, false)"><i class="fas fa-play p-3"></i><i class="fa fa-download p-3" aria-hidden="true"></i><i class="fas fa-user-secret p-3"></i></span><br>
+											<span class="border_gamble gamble_pointer py-1" ng-click="DirectLinkCopy(x.Link_link, true)"><i class="fas fa-play p-3"></i><i class="fas fa-copy p-3"></i></i></span>
+											<span class="border_gamble gamble_pointer py-1" ng-click="DirectLinkCopy(x.Link_link, false)"><i class="fas fa-play p-3"></i><i class="fas fa-copy p-3"></i><i class="fas fa-user-secret p-3"></i></span>
+										</span>
                                     </td>
                                 </tr>
                             </tbody>
