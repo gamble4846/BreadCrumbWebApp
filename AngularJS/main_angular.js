@@ -253,7 +253,7 @@ app.controller("myCtrl", function($scope, $http) {
             }
         }
         return toreturn_epsodes;
-    }
+    };
 
     $scope.getCurrentEpsiodeLinks = function(get_Episode_id){
         toreturn_links = [];
@@ -263,5 +263,21 @@ app.controller("myCtrl", function($scope, $http) {
             }
         }
         return toreturn_links;
-    }
+    };
+
+    $scope.CalculateTvShowHistory = function(Season_Id, Episode_Id){
+        final_count = 0;
+        for(let i=0; i<$scope.History_DATA.TvShows.length; i++){
+            for(let j=0; j<$scope.History_DATA.TvShows[i].DATA.length; j++){
+                if($scope.History_DATA.TvShows[i].DATA[j].Series_Id_His == $scope.local_Opened_Series_ID){
+                    if($scope.History_DATA.TvShows[i].DATA[j].Series_SeasonId_His == Season_Id){
+                        if($scope.History_DATA.TvShows[i].DATA[j].Series_EpisodeID_His == Episode_Id){
+                            final_count++;
+                        }
+                    }
+                }
+            }
+        }
+        return final_count;
+    };
 });

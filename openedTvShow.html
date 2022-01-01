@@ -122,15 +122,17 @@
                                         <tr>
                                             <th scope="col">Ep #</th>
                                             <th scope="col">Ep Name</th>
+											<th scope="col">History</th>
                                         </tr>
                                     </thead>
                                     <tbody ng-repeat="x in getCurrentSeasonEpisodes(Selected_Season)">
                                         <tr ng-if="x.Season_Id == Selected_Season" class="gamble_pointer" data-toggle="collapse" data-target="#episode_link_col_{{x.Episode_Id}}">
                                             <td>{{x.Episode_Number}}</td>
                                             <td>{{x.Episode_Name}}</td>
+											<td>{{CalculateTvShowHistory(Selected_Season, x.Episode_Id)}}</td>
                                         </tr>
                                         <tr class="collapse multi-collapse" id="episode_link_col_{{x.Episode_Id}}">
-                                            <td colspan="2">
+                                            <td colspan="3">
                                                 <table class="table text-white">
                                                     <thead>
                                                         <tr>
