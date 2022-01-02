@@ -65,6 +65,7 @@ app.controller("myCtrl", function($scope, $http) {
     $scope.SaveSettings = function(){
         localStorage.setItem('local_Script_Link', $scope.Settings_Script_Link);
         localStorage.setItem('local_Google_APIKey', $scope.Settings_Main_GoogleDriveAPIKEY);
+        $scope.call_snake_bar("Settings Saved");
     };
 
     $scope.init_settings = function(){
@@ -181,6 +182,10 @@ app.controller("myCtrl", function($scope, $http) {
         if(inco){
             $scope.CreateHistory_TvShow(rev_seasonid,rev_episodeid);
         }
+    };
+
+    $scope.MovieLink_Mal = function(link, inco, direct_nornmal, copy_open){
+
     };
 
     $scope.init_OpenedTvShow = function(){
