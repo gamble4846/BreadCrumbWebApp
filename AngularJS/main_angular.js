@@ -159,6 +159,11 @@ app.controller("myCtrl", function($scope, $http) {
         return final_link;
     };
 
+    $scope.copy_password = function(toCopy){
+        $scope.call_snake_bar("Password Copied");
+        $scope.copy_to_clip(toCopy);
+    }
+
     $scope.TvShowLink_Mal = function(link, copy_open, direct_nornmal, inco, rev_seasonid, rev_episodeid){
         final_link = link;
         if(direct_nornmal == "direct"){
@@ -167,6 +172,7 @@ app.controller("myCtrl", function($scope, $http) {
 
         if(copy_open == "copy"){
             $scope.copy_to_clip(final_link);
+            $scope.call_snake_bar("Link Copied");
         }
         else{
             $scope.open_link_newtab(final_link);
@@ -287,6 +293,7 @@ app.controller("myCtrl", function($scope, $http) {
     $scope.CreateHistory_TvShow = function(Season_Id, Episode_Id){
         console.log($scope.local_Opened_Series_Serve);
         console.log($scope.local_Opened_Series_ID);
+
         Para1 = "?main=CreateHistory_TvShow&Series_SeasonId_His="+Season_Id+"&Series_EpisodeID_His="+Episode_Id;
         Para2 = "&Server_ID_His="+$scope.local_Opened_Series_Server;
         Para3 = "&Series_Id_His="+$scope.local_Opened_Series_ID;
@@ -297,7 +304,7 @@ app.controller("myCtrl", function($scope, $http) {
         $http.post(localStorage['local_Script_Link']+final_Para).then(function(response){
             console.log(response.data);
         });
-    }
+    };
 
     $scope.getCurrentTime = function () { 
         var currentdate = new Date(); 
@@ -308,5 +315,13 @@ app.controller("myCtrl", function($scope, $http) {
                 + currentdate.getMinutes() + ":" 
                 + currentdate.getSeconds();
         return datetime;
-    }
+    };
+
+    $scope.call_snake_bar = function(message){
+        var x = document.getElementById("snackbar");
+        x.innerHTML = message;
+        x.className = "show";
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        console.log("Snake Bar Called");
+    };
 });

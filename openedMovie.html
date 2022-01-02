@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="CSS/magnific-popup.css">
 	<link rel="stylesheet" href="CSS/main.css">
 	<link rel="stylesheet" href="CSS/gamble_CSS.css">
+	<link rel="stylesheet" href="CSS/snake_bar.css">
 	<!-- end CSS -->
 
 	<!-- Favicons -->
@@ -162,7 +163,7 @@
                                         <span>Subtitles: {{x.Link_Subtitles}}<br></span>
                                         <span>Email: {{x.Link_Email}}<br></span>
                                         <span>Size: {{x.Link_Size}}<br></span>
-                                        <span ng-if="x.Link_Password != '-'">Password: {{x.Link_Password}} <span><i class="fas fa-copy gamble_pointer" ng-click="copy_to_clip(x.Link_Password)"></i></span><br></span>
+                                        <span ng-if="x.Link_Password != '-'">Password: {{x.Link_Password}} <span><i class="fas fa-copy gamble_pointer" ng-click="copy_password(x.Link_Password)"></i></span><br></span>
                                         <span ng-if="x.Link_Desc != '-'">Desc: {{x.Link_Desc}}<br></span>
                                         <span>Streamable: {{x.Streamable}}<br></span>
                                         <span class="border_gamble gamble_pointer py-1" ng-click="OpenLink(x.Link_link, true)"><i class="fas fa-link p-3"></i><i class="fa fa-external-link p-3" aria-hidden="true"></i></span>
@@ -191,6 +192,7 @@
     
 
 	<!-- footer -->
+	<div id="snackbar"></div>
 	<footer class="footer">
 		<div class="container">
 			<div class="row">
