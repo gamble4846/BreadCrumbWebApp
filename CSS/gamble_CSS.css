@@ -26,4 +26,149 @@ a{
     
     margin: auto;
 }
-  
+
+.pointer {cursor: pointer;}
+
+.table_custom_gamble{
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.cursive{
+    font-family: GeraldinePersonal;
+}
+
+@font-face {
+    font-family: 'GeraldinePersonal'; /*a name to be used later*/
+    src: url('/Fonts/GeraldinePersonalUseItalic-PK12m.ttf'); /*URL to font*/
+}
+
+.image_card{
+    height: 200px; 
+    width: 200px;
+    overflow: hidden; 
+    border-radius: 5px;
+}
+
+@media (max-width: 480px) { 
+    .image_card{
+        height: 100px; 
+        width: 100px;
+    }
+}
+
+.hover_dark_blue:hover{
+    background-color: #000033;
+}
+
+.limit_Word_Wrap{
+    word-wrap: break-word;
+    overflow: hidden;
+}
+
+.image_photos_div{
+    width: 150px;
+    height: 150px;
+
+    border-radius: 5px;
+}
+
+.image_photos_img{
+    max-width: 100%;
+    max-height: 100%;
+
+    min-width: 100%;
+    min-height: 100%;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    object-fit: cover;
+
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.image_photos_img:hover {
+    box-shadow: 5px 5px 5px black;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    filter: brightness(60%);
+    -webkit-filter: brightness(60%);
+}
+
+.nav-link{
+    color: white;
+    transition: 0.5s ease;
+}
+
+.navbar_custom{
+    border: 1px solid #246fcb;
+}
+
+.nav-item:hover{
+    color: #246fcb;
+    transition: 0.5s ease;
+}
+
+.title{
+    text-align: left;
+}
+
+.min_height{
+    min-height: 450px;
+}
+
+.image_album_img{
+    max-width: 100%;
+    max-height: 100%;
+
+    min-width: 100%;
+    min-height: 100%;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    object-fit: cover;
+
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.image_album_img:hover {
+    box-shadow: 5px 5px 5px black;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    filter: brightness(60%);
+    -webkit-filter: brightness(60%);
+}
+
+.image_album_div{
+    width: 150px;
+    height: 120px;
+
+    border-radius: 5px;
+}
+
+.albumname{
+    margin-bottom: 15px;
+}
+
+.flix_card__title{
+    text-align: left;
+}

@@ -185,22 +185,6 @@ app.controller("myCtrl", function($scope, $http) {
     };
 
     $scope.MovieLink_Mal = function(link, inco, direct_nornmal, copy_open){
-        final_link = link;
-        if(direct_nornmal == "direct"){
-            final_link = $scope.create_APILink(link);
-        }
-
-        if(copy_open == "copy"){
-            $scope.copy_to_clip(final_link);
-            $scope.call_snake_bar("Link Copied");
-        }
-        else{
-            $scope.open_link_newtab(final_link);
-        }
-
-        if(inco){
-            $scope.CreateHistory_Movie();
-        }
 
     };
 
@@ -324,7 +308,6 @@ app.controller("myCtrl", function($scope, $http) {
 
         $http.post(localStorage['local_Script_Link']+final_Para).then(function(response){
             console.log(response.data);
-            $scope.call_snake_bar("Added to History");
         });
     };
 
@@ -346,126 +329,4 @@ app.controller("myCtrl", function($scope, $http) {
         setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
         console.log("Snake Bar Called");
     };
-
-    $scope.init_folders_files = function(){
-        $scope.Server_Data = JSON.parse(localStorage['Server_Data']);
-        console.log($scope.Server_Data);
-        $scope.bifurcateDATA();
-        $scope.getCurrentFolder_Data();
-    };
-
-    $scope.onlyUnique = function(value, index, self) {
-        return self.indexOf(value) === index;
-    }
-
-    $scope.getCurrentFolder_Data = function(){
-        $scope.local_FF_Server_ID = localStorage['local_FF_server_id'];
-        if($scope.local_FF_Server_ID == null){
-            $scope.local_FF_Server_ID = "-";
-        }
-
-        $scope.OnlyServers = [];
-        for(let i=0; i<($scope.Folders_Files_DATA.Folders).length;i++){
-            $scope.OnlyServers.push($scope.Folders_Files_DATA.Folders[i].Server_ID);
-        }
-
-        for(let i=0; i<($scope.Folders_Files_DATA.Files).length;i++){
-            $scope.OnlyServers.push($scope.Folders_Files_DATA.Files[i].Server_ID);
-        }
-
-        for(let i=0; i<($scope.Folders_Files_DATA.File_Links).length;i++){
-            $scope.OnlyServers.push($scope.Folders_Files_DATA.File_Links[i].Server_ID);
-        }
-        $scope.OnlyServers = ($scope.OnlyServers).filter($scope.onlyUnique);
-
-        $scope.local_Opened_Folder_ID = localStorage['Opened_folder_id'];
-        if($scope.local_Opened_Folder_ID == null){
-            $scope.local_Opened_Folder_ID = "-";
-        }
-
-        $scope.Folders_Now = [];
-        for(let i=0; i<($scope.Folders_Files_DATA.Folders).length;i++){
-            if(($scope.Folders_Files_DATA.Folders)[i].Server_ID == $scope.local_FF_Server_ID){
-                for(let j=0; j<($scope.Folders_Files_DATA.Folders)[i].DATA.length;j++){
-                    if($scope.local_Opened_Folder_ID == $scope.Folders_Files_DATA.Folders[i].DATA[j].Folder_UpperFolderId){
-                        $scope.Folders_Now.push($scope.Folders_Files_DATA.Folders[i].DATA[j]);
-                    }
-                }
-            }
-        }
-
-        $scope.Files_Now = [];
-        for(let i=0; i<($scope.Folders_Files_DATA.Files).length;i++){
-            if(($scope.Folders_Files_DATA.Files)[i].Server_ID == $scope.local_FF_Server_ID){
-                for(let j=0; j<($scope.Folders_Files_DATA.Files)[i].DATA.length;j++){
-                    if($scope.local_Opened_Folder_ID == $scope.Folders_Files_DATA.Files[i].DATA[j].Files_UpperFolderId){
-                        $scope.Files_Now.push($scope.Folders_Files_DATA.Files[i].DATA[j]);
-                    }
-                }
-            }
-        }
-
-        for(let i=0; i<$scope.Files_Now.length; i++){
-            if($scope.Files_Now[i].File_Type == ".zip"){
-                $scope.Files_Now[i].File_Type = "fa fa-file-archive-o";
-            }
-        }
-    }
-
-    $scope.FFServerSelected = function(server_id){
-        localStorage.setItem('local_FF_server_id', server_id);
-        $scope.getCurrentFolder_Data();
-    }
-
-    $scope.ChangeFolder = function(FolderID){
-        localStorage.setItem('Opened_folder_id', FolderID);
-        $scope.getCurrentFolder_Data();
-    }
-
-    $scope.GoBack_FUN = function(){
-        if($scope.local_Opened_Folder_ID == "-"){
-            localStorage.setItem('local_FF_server_id',"-");
-        }
-
-        if($scope.local_FF_Server_ID == "-"){
-            console.log("WTF BRO");
-        }
-
-        for(let i=0; i<($scope.Folders_Files_DATA.Folders).length;i++){
-            if(($scope.Folders_Files_DATA.Folders)[i].Server_ID == $scope.local_FF_Server_ID){
-                for(let j=0; j<($scope.Folders_Files_DATA.Folders)[i].DATA.length;j++){
-                    if($scope.local_Opened_Folder_ID == $scope.Folders_Files_DATA.Folders[i].DATA[j].Folder_Id){
-                        localStorage.setItem('Opened_folder_id', $scope.Folders_Files_DATA.Folders[i].DATA[j].Folder_UpperFolderId);
-                    }
-                }
-            }
-        }
-        $scope.getCurrentFolder_Data();
-    }
-
-    $scope.GoToServers_FUN = function(){
-        localStorage.setItem('local_FF_server_id',"-");
-        localStorage.setItem('Opened_folder_id','-');
-        $scope.getCurrentFolder_Data();
-    }
-
-    $scope.HideAll_Photos = function(){
-        $scope.sh_albums = false;
-        $scope.sh_all_photos = false;
-    }
-
-    $scope.show_Photos = function(){
-        $scope.HideAll_Photos();
-        $scope.sh_all_photos = true;
-    }
-
-    $scope.show_Albums = function(){
-        $scope.HideAll_Photos();
-        $scope.sh_albums = true;
-    }
-
-    $scope.init_photos = function(){
-        $scope.HideAll_Photos();
-        $scope.sh_albums = true;
-    }
 });

@@ -1,0 +1,29 @@
+a{
+    text-decoration: none !important
+}
+
+.margin_top_gamble{
+    margin-top: 100px;
+}
+
+.gamble_pointer {
+    cursor: pointer;
+}
+
+.border_gamble{
+    border-style: solid;
+}
+
+.div_full_gamble_center {
+    width: 100px;
+    height: 100px;
+    
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    
+    margin: auto;
+}
+  
